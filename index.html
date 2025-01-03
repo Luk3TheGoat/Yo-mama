@@ -1,72 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        .choices {
-            margin: 20px 0;
-        }
-        .choices button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            border: 2px solid #333;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-        .choices button:hover {
-            background-color: #ddd;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .game-container {
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 400px;
+      background-color: #fff;
+    }
+
+    .choices button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .choices button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
+  <h1>Rock Paper Scissors</h1>
+  <div class="game-container">
     <div class="choices">
-        <button onclick="playGame('rock')">Rock</button>
-        <button onclick="playGame('paper')">Paper</button>
-        <button onclick="playGame('scissors')">Scissors</button>
+      <button onclick="playGame('rock')">Rock</button>
+      <button onclick="playGame('paper')">Paper</button>
+      <button onclick="playGame('scissors')">Scissors</button>
     </div>
-    <div id="result"></div>
+    <div class="result">
+      <p id="user-choice">Your Choice: </p>
+      <p id="computer-choice">Computer's Choice: </p>
+      <p id="winner">Result: </p>
+    </div>
+  </div>
+  <script>
+    function playGame(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    <script>
-        function playGame(playerChoice) {
-            const choices = ['rock', 'paper', 'scissors'];
-            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = '';
+      // Display user and computer choices
+      document.getElementById('user-choice').innerText = `Your Choice: ${userChoice}`;
+      document.getElementById('computer-choice').innerText = `Computer's Choice: ${computerChoice}`;
 
-            if (playerChoice === computerChoice) {
-                result = `It's a tie! Both chose ${playerChoice}.`;
-            } else if (
-                (playerChoice === 'rock' && computerChoice === 'scissors') ||
-                (playerChoice === 'paper' && computerChoice === 'rock') ||
-                (playerChoice === 'scissors' && computerChoice === 'paper')
-            ) {
-                result = `You win! ${playerChoice} beats ${computerChoice}.`;
-            } else {
-                result = `You lose! ${computerChoice} beats ${playerChoice}.`;
-            }
+      // Determine the winner
+      let result = '';
+      if (userChoice === computerChoice) {
+        result = 'It\'s a tie!';
+      } else if (
+        (userChoice === 'rock' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'rock') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        result = 'You win!';
+      } else {
+        result = 'You lose!';
+      }
 
-            document.getElementById('result').textContent = result;
-        }
-    </script>
+      // Display the result
+      document.getElementById('winner').innerText = `Result: ${result}`;
+    }
+  </script>
 </body>
 </html>
